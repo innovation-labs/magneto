@@ -33,7 +33,8 @@ var dest = '.tmp/scripts/';
 var apiString = {
   dev: "base: 'http://localhost:9050/api/'",
   stage: "base: 'http://stage.intentaware.com/api/'",
-  live: "base: 'https://app.intentaware.com/api/'"
+  live: "base: 'https://app.intentaware.com/api/'",
+  lab: "base: 'http://innovationlabs.online/api/"
 }
 
 gulp.task('styles', function() {
@@ -81,28 +82,28 @@ gulp.task('styles:aware', function() {
 
 gulp.task('aware', function() {
 
-  if (args.live || args.stage) {
+  if (args.live || args.stage || args.lab) {
     uglifyOptions.outSourceMap = false;
     uglifyOptions.compress.drop_console = true;
     dest = '../../apps/dashboard/static/impressions/dist/'
   }
 
   gulp.src(['bower_components/axios/dist/axios.js', 'app/scripts/ai.js'])
-    .pipe($.if(!(args.live || args.stage), $.sourcemaps.init()))
+    .pipe($.if(!(args.live || args.stage || args.lab), $.sourcemaps.init()))
     .pipe($.concat('aware.js'))
     .pipe($.replace("https://github.com/mzabriskie/axios/blob/master/README.md#response-api", "Error!"))
     .pipe($.if(args.live, $.replace(apiString.dev, apiString.live)))
     .pipe($.if(args.stage, $.replace(apiString.dev, apiString.stage)))
     .pipe($.uglify(uglifyOptions))
     //.pipe(console.log(args))
-    .pipe($.if(!(args.live || args.stage), $.sourcemaps.write()))
+    .pipe($.if(!(args.live || args.stage || args.lab), $.sourcemaps.write()))
     .pipe(gulp.dest(dest))
     .pipe($.size(sizeOptions));
 });
 
 gulp.task('guages', function() {
 
-  if (args.live || args.stage) {
+  if (args.live || args.stage || args.lab) {
     uglifyOptions.outSourceMap = false;
     uglifyOptions.compress.drop_console = true;
     dest = '../../apps/dashboard/static/impressions/dist/'
