@@ -94,6 +94,7 @@ gulp.task('aware', function() {
     .pipe($.replace("https://github.com/mzabriskie/axios/blob/master/README.md#response-api", "Error!"))
     .pipe($.if(args.live, $.replace(apiString.dev, apiString.live)))
     .pipe($.if(args.stage, $.replace(apiString.dev, apiString.stage)))
+    .pipe($.if(args.lab, $.replace(apiString.dev, apiString.lab)))
     .pipe($.uglify(uglifyOptions))
     //.pipe(console.log(args))
     .pipe($.if(!(args.live || args.stage || args.lab), $.sourcemaps.write()))
@@ -101,7 +102,7 @@ gulp.task('aware', function() {
     .pipe($.size(sizeOptions));
 });
 
-gulp.task('guages', function() {
+gulp.task('guages', function () {
 
   if (args.live || args.stage || args.lab) {
     uglifyOptions.outSourceMap = false;
@@ -115,8 +116,9 @@ gulp.task('guages', function() {
     .pipe($.replace("https://github.com/mzabriskie/axios/blob/master/README.md#response-api", "Error!"))
     .pipe($.if(args.live, $.replace(apiString.dev, apiString.live)))
     .pipe($.if(args.stage, $.replace(apiString.dev, apiString.stage)))
+    .pipe($.if(args.lab, $.replace(apiString.dev, apiString.lab)))
     .pipe($.uglify(uglifyOptions))
-    .pipe($.if(!(args.live || args.stage), $.sourcemaps.write()))
+    .pipe($.if(!(args.live || args.stage || args.lab), $.sourcemaps.write()))
     .pipe(gulp.dest(dest))
     .pipe($.size(sizeOptions));
 });
