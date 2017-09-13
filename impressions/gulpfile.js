@@ -34,7 +34,7 @@ var apiString = {
   dev: "base: 'http://localhost:9050/api/'",
   stage: "base: 'http://stage.intentaware.com/api/'",
   live: "base: 'https://app.intentaware.com/api/'",
-  lab: "base: 'http://innovationlabs.online/api/"
+  lab: "base: 'http://innovationlabs.online/api/'"
 }
 
 gulp.task('styles', function() {
