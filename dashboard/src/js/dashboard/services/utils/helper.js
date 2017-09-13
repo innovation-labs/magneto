@@ -58,8 +58,8 @@ angular.module('adomattic.dashboard')
       assetID = assetID || null;
 
 
-      var assetRoot = ((window.location.hostname === 'app.intentaware.com') || (window.location.hostname === 'live.intentaware.com')) ? window.location.protocol + '//' + window.location.host + '/magneto' : 'scripts';
-
+      // var assetRoot = ((window.location.hostname === 'app.intentaware.com') || (window.location.hostname === 'live.intentaware.com')) ? window.location.protocol + '//' + window.location.host + '/magneto' : 'scripts';
+      var assetRoot = (window.location.hostname === 'app.intentaware.com' || window.location.hostname === 'live.intentaware.com') ? window.location.protocol + '//' + window.location.host + '/magneto' : 'http://' + window.location.host + '/static/impressions/dist/';
       var pixel;
 
       if (assetID) {
